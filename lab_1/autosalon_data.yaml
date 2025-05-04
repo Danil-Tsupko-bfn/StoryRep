@@ -1,9 +1,16 @@
 ---
-AvtoTrade:
-  :address: Glovna 15a
+:АвтоГранд:
+  :address: Київ, вул. Перемоги 10
   :cars:
-  - Mazda
-  - Honda
+  - Toyota Camry
+  - BMW X5
   :phones:
-  - '098765'
-  - '12345'
+  - "+380931112233"
+  - "+380673334455"
+:ЕлітАвто:
+  :address: Львів, вул. Наукова 7
+  :cars:
+  - Audi A6
+  - Mercedes C200
+  :phones:
+  - "+380501112233"
