@@ -1,0 +1,9 @@
+---
+AvtoTrade:
+  :address: Glovna 15a
+  :cars:
+  - Mazda
+  - Honda
+  :phones:
+  - '098765'
+  - '12345'
