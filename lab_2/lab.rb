@@ -1,62 +1,68 @@
 require 'json'
 require 'yaml'
 
-FILENAME = "contacts_data.yaml"  # Автофайл для збереження
+FILENAME = "autosalon_data.yaml"  
 
-class PhoneBook
+class AutoSalonDirectory
   def initialize
     @contacts = {}
   end
 
-  # Додавання нового контакту
-  def add_contact(name, phones)
-    @contacts[name] = phones
+  def add_contact(name, address, cars, phones)
+    @contacts[name] = {
+      address: address,
+      cars: cars,
+      phones: phones
+    }
   end
 
-  # Редагування існуючого контакту
   def edit_contact(name)
     if @contacts.key?(name)
-      puts "Нові телефони (залиш порожнім, якщо не змінюєш):"
-      
-      print "Телефони (через кому): "
-      phones = gets.strip.split(",").map(&:strip)
-      @contacts[name] = phones unless phones.empty?
+      puts "Нові дані (залиш порожнім, якщо не змінюєш):"
 
-      puts "Контакт оновлено."
+      print "Нова адреса: "
+      address = gets.strip
+      @contacts[name][:address] = address unless address.empty?
+
+      print "Нові авто (через кому): "
+      cars = gets.strip
+      @contacts[name][:cars] = cars.split(",").map(&:strip) unless cars.empty?
+
+      print "Нові телефони (через кому): "
+      phones = gets.strip
+      @contacts[name][:phones] = phones.split(",").map(&:strip) unless phones.empty?
+
+      puts "Салон оновлено."
     else
-      puts "Контакт не знайдено."
+      puts "Салон не знайдено."
     end
   end
 
-  # Видалення контакту
   def delete_contact(name)
     if @contacts.delete(name)
-      puts "Контакт видалено."
+      puts "Салон видалено."
     else
-      puts "Контакт не знайдено."
+      puts "Салон не знайдено."
     end
   end
 
-  # Пошук контакту
   def find_contact(name)
     contact = @contacts[name]
     if contact
       display_contact(name, contact)
     else
-      puts "Контакт не знайдено."
+      puts "Салон не знайдено."
     end
   end
 
-  # Перегляд всіх контактів
   def list_contacts
     if @contacts.empty?
-      puts "Немає жодного контакту."
+      puts "Немає жодного автосалону."
     else
-      @contacts.each { |name, phones| display_contact(name, phones) }
+      @contacts.each { |name, data| display_contact(name, data) }
     end
   end
 
-  # Збереження контактів у файл
   def save_to_file(filename, format = :json)
     case format
     when :json
@@ -69,7 +75,6 @@ class PhoneBook
     puts "Дані збережено у файл #{filename}"
   end
 
-  # Завантаження контактів з файлу
   def load_from_file(filename)
     case File.extname(filename)
     when '.json'
@@ -84,27 +89,29 @@ class PhoneBook
 
   private
 
-  def display_contact(name, phones)
-    puts "\nКонтакт: #{name}"
-    puts "Телефони: #{phones.join(', ')}"
+  def display_contact(name, data)
+    puts "\nСалон: #{name}"
+    puts "Адреса: #{data[:address]}"
+    puts "Автомобілі: #{data[:cars].join(', ')}"
+    puts "Телефони: #{data[:phones].join(', ')}"
   end
 end
 
 # === Меню ===
 
 def menu
-  phonebook = PhoneBook.new
+  directory = AutoSalonDirectory.new
 
   # Автоматичне завантаження
-  phonebook.load_from_file(FILENAME) if File.exist?(FILENAME)
+  directory.load_from_file(FILENAME) if File.exist?(FILENAME)
 
   loop do
-    puts "\n--- МЕНЮ ТЕЛЕФОННОГО ДОВІДНИКА ---"
-    puts "1. Переглянути всі контакти"
-    puts "2. Додати контакт"
-    puts "3. Знайти контакт"
-    puts "4. Редагувати контакт"
-    puts "5. Видалити контакт"
+    puts "\n--- МЕНЮ АВТОСАЛОНУ ---"
+    puts "1. Переглянути всі салони"
+    puts "2. Додати салон"
+    puts "3. Знайти салон"
+    puts "4. Редагувати салон"
+    puts "5. Видалити салон"
     puts "6. Зберегти у файл"
     puts "7. Завантажити з файлу"
     puts "8. Вийти"
@@ -112,35 +119,39 @@ def menu
 
     case gets.to_i
     when 1
-      phonebook.list_contacts
+      directory.list_contacts
     when 2
-      print "Ім'я контакту: "
+      print "Назва салону: "
       name = gets.strip
+      print "Адреса: "
+      address = gets.strip
+      print "Автомобілі (через кому): "
+      cars = gets.strip.split(",").map(&:strip)
       print "Телефони (через кому): "
       phones = gets.strip.split(",").map(&:strip)
-      phonebook.add_contact(name, phones)
-      puts "Контакт додано."
+      directory.add_contact(name, address, cars, phones)
+      puts "Салон додано."
     when 3
-      print "Введіть ім'я контакту: "
-      phonebook.find_contact(gets.strip)
+      print "Введіть назву салону: "
+      directory.find_contact(gets.strip)
     when 4
-      print "Введіть ім'я контакту для редагування: "
-      phonebook.edit_contact(gets.strip)
+      print "Введіть назву салону для редагування: "
+      directory.edit_contact(gets.strip)
     when 5
-      print "Введіть ім'я контакту для видалення: "
-      phonebook.delete_contact(gets.strip)
+      print "Введіть назву салону для видалення: "
+      directory.delete_contact(gets.strip)
     when 6
       print "Введіть ім'я файлу: "
       filename = gets.strip
       print "Формат (json/yaml): "
       format = gets.strip.to_sym
-      phonebook.save_to_file(filename, format)
+      directory.save_to_file(filename, format)
     when 7
       print "Введіть ім'я файлу: "
       filename = gets.strip
-      phonebook.load_from_file(filename)
+      directory.load_from_file(filename)
     when 8
-      phonebook.save_to_file(FILENAME, :yaml)
+      directory.save_to_file(FILENAME, :yaml)
       puts "Дані автоматично збережено у файл #{FILENAME}."
       puts "До побачення!"
       break

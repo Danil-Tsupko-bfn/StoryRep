@@ -1,7 +1,7 @@
 require 'json'
 require 'yaml'
 
-FILENAME = "autosalon_data.yaml"  # Автофайл для збереження
+FILENAME = "autosalon_data.yaml"  
 
 class AutoSalonDirectory
   def initialize
