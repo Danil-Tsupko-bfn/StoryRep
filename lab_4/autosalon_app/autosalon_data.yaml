@@ -1,0 +1,23 @@
+- name: АвтоСвіт
+  address: вул. Київська, 123
+  phones:
+    - "+380991234567"
+    - "+380501234567"
+  cars:
+    - brand: BMW
+      model: X5
+      year: 2022
+    - brand: Audi
+      model: A6
+      year: 2021
+- name: МегаКарс
+  address: просп. Перемоги, 45
+  phones:
+    - "+380631234567"
+  cars:
+    - brand: Toyota
+      model: Camry
+      year: 2022
+    - brand: Nissan
+      model: Qashqai
+      year: 2023
