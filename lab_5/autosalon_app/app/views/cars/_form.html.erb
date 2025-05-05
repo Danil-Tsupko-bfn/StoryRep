@@ -1,0 +1,30 @@
+<%= form_with(model: car, local: true) do |form| %>
+    <% if car.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(car.errors.count, "помилка") %> не дозволили зберегти авто:</h4>
+        <ul>
+          <% car.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="mb-3">
+      <%= form.label :brand, class: "form-label" %>
+      <%= form.text_field :brand, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :model, class: "form-label" %>
+      <%= form.text_field :model, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :year, class: "form-label" %>
+      <%= form.number_field :year, class: "form-control" %>
+    </div>
+  
+    <%= form.submit class: "btn btn-primary" %>
+  <% end %>
+  

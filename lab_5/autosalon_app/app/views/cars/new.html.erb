@@ -1,0 +1,27 @@
+<h1 class="text-center mb-4">Create New Car</h1>
+
+<%= form_with(model: @car, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :brand, class: 'form-label' %>
+    <%= form.text_field :brand, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :model, class: 'form-label' %>
+    <%= form.text_field :model, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :year, class: 'form-label' %>
+    <%= form.number_field :year, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, class: 'form-label' %>
+    <%= form.number_field :price, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit 'Create Car', class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<h1>Car Details</h1>
+
+<p><strong>Brand:</strong> <%= @car.brand %></p>
+<p><strong>Model:</strong> <%= @car.model %></p>
+
+
+<%= link_to 'Back to List', cars_path %> |
+<%= link_to 'Edit', edit_car_path(@car) %> |
+<%= link_to 'Delete', @car, method: :delete, data: { confirm: 'Are you sure?' } %>
