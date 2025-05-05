@@ -1,10 +1,4 @@
-class CreateAutoSalons < ActiveRecord::Migration[7.1]
-  def change
-    create_table :auto_salons do |t|
-      t.string :name
-      t.string :address
-
-      t.timestamps
-    end
-  end
+class Car < ApplicationRecord
+  belongs_to :auto_salon
+  validates :auto_salon, presence: true
 end
