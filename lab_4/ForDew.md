@@ -7,4 +7,4 @@ phone = s.phones.create(number: "+380501234567")
 puts phone.valid?        
 
 
-
+Salon.all
