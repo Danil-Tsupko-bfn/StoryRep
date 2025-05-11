@@ -10,34 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_04_233348) do
-  create_table "auto_salons", force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2025_05_11_203910) do
+  create_table "cars", force: :cascade do |t|
+    t.string "name"
+    t.integer "salon_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["salon_id"], name: "index_cars_on_salon_id"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.string "number"
+    t.integer "salon_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["salon_id"], name: "index_phones_on_salon_id"
+  end
+
+  create_table "salons", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cars", force: :cascade do |t|
-    t.string "model"
-    t.integer "auto_salon_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "brand"
-    t.integer "year"
-    t.index ["auto_salon_id"], name: "index_cars_on_auto_salon_id"
-  end
-
-  create_table "phones", force: :cascade do |t|
-    t.string "number"
-    t.integer "auto_salon_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "car_id"
-    t.index ["auto_salon_id"], name: "index_phones_on_auto_salon_id"
-  end
-
-  add_foreign_key "cars", "auto_salons"
-  add_foreign_key "phones", "auto_salons"
+  add_foreign_key "cars", "salons"
+  add_foreign_key "phones", "salons"
 end

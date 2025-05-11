@@ -1,3 +1,5 @@
 class Car < ApplicationRecord
-  has_many :phones
+  belongs_to :salon
+
+  validates :name, presence: true
 end

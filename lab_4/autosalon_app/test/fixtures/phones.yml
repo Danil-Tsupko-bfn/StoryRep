@@ -2,8 +2,8 @@
 
 one:
   number: MyString
-  auto_salon: one
+  salon: one
 
 two:
   number: MyString
-  auto_salon: two
+  salon: two
