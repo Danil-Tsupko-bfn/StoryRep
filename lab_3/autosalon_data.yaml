@@ -1,5 +1,5 @@
 ---
-AvtoTrade:
+- :name: AvtoTrade
   :address: Glovna 15a
   :cars:
   - Mazda
@@ -7,3 +7,11 @@ AvtoTrade:
   :phones:
   - '098765'
   - '12345'
+- :name: AutoPlus
+  :address: Kiyivska 22
+  :cars:
+  - Toyota
+  - BMW
+  :phones:
+  - '0674321'
+  - '0445678'

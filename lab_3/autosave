@@ -1,0 +1,7 @@
+---
+- :name: AvtoToo
+  :address: golovna 67
+  :cars:
+  - Renaul
+  :phones:
+  - '983257698'

@@ -6,4 +6,4 @@
 
 <%= link_to 'Back to List', cars_path %> |
 <%= link_to 'Edit', edit_car_path(@car) %> |
-<%= link_to 'Delete', @car, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= button_to "Destroy this table", @car, method: :delete %>
